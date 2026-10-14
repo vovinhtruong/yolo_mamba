@@ -14,13 +14,18 @@
 ## 2. DECIDED — do not change on your own
 - Target input size for the main experiments: `imgsz=640`. (`1120` belongs to Approach A and is only a control if the lead decides so.)
 - Ablation is **2 × 2** at `imgsz=640`: {with/without rescaling method B} × {with/without Mamba}.
-- No ablation over multiple Mamba positions: the lead will choose **one** position.
+- **Mamba workflow (3 phases):**
+  1. Reproduce **every** reference Mamba+YOLO paper that has public code, on GRAZ — goals: learn how others customize YOLO, and get baselines for later comparison. (Results only show "their model on our data"; not directly comparable to YOLO26 because of different Ultralytics versions, pretraining and heads.)
+  2. Discuss with the agents to pick candidate Mamba positions.
+  3. Try candidates one by one until a suitable position is found; that **one** position is used in the 2 × 2 ablation.
+- **Model selection uses the validation set only. The test set is run once, at the very end.**
 - The model uses 4 block types: MLP, CNN, Attention, SSM — no RNN.
 - Statistics: 3 random seeds; no Wilcoxon test in the current proposal.
 - Approach B is a main contribution; in Proposal v2 it is presented as a main contribution only in the Methodology chapter.
 
 ## 3. NOT YET DECIDED — agents may only propose (with reasons), never decide
-- Where to place Mamba in YOLO26 (candidates: layers 2, 4, 6, 8, 10, 13, 16, 19, 22 — see `05_Notes/261013.md` §1).
+- Where to place Mamba in YOLO26 — candidates are chosen after phase 1 (possible layers: 2, 4, 6, 8, 10, 13, 16, 19, 22 — see `05_Notes/261013.md` §1).
+- Whether to add Wilcoxon (or another statistical test), e.g. when comparing Mamba positions whose differences may be smaller than seed-to-seed variation — the lead will discuss with the professor.
 - The concrete algorithm for Approach B.
 - Epochs/batch size and which machine to use for the full Mamba-YOLO-T training run.
 
