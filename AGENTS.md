@@ -1,6 +1,6 @@
 # AGENTS.md — Shared context for all agents
 
-> Every agent (Claude, Antigravity, Cursor, GitHub Copilot, Gemini, ChatGPT, Microsoft Copilot) **must read this file before doing anything**.
+> Every agent (Claude, Antigravity, Cursor, GitHub Copilot, Codex, Gemini, Microsoft Copilot) **must read this file before doing anything**.
 > Only the deputy lead (Claude) edits this file, and only after the lead approves.
 
 ## 1. Project
@@ -41,6 +41,8 @@
 06_Reports/   weekly report slides
 07_Thesis/    Thesis, Draft/, Proposal/
 08_Teaching/  teaching slides for new students
+09_Agents/    per-agent draft areas: claude/, codex/, gemini/, antigravity/
+AGENTS.md     short pointer to this file + write-zone rules
 ```
 **This repo (`03_Code/`)**:
 ```
@@ -69,15 +71,30 @@ repos/        (git-ignored) third-party source: ultralytics, mamba, yolo26
 | **Antigravity** | Reproduces reference papers (env setup, fixing dependencies, test runs) | Only inside `mamba_yolo_ref/<PaperName>/` |
 | **Cursor** (Free) | Main IDE: editing code, refactoring | Work on its own branch |
 | **GitHub Copilot** (Free) | Backup when Cursor runs out of requests; code suggestions in VS Code when SSH-ing into the lab machine | Work on its own branch |
-| **Gemini** | Reads many papers at once, related work, citation checks | Documents only, no code changes |
-| **ChatGPT** | Critic: challenges ideas and wording, **independently checks Claude's math/logic/analysis**, reviews PRs, drafts teaching material | Documents and reviews only, no code changes |
-| **Microsoft Copilot** | Backup when ChatGPT runs out of requests | Same as ChatGPT |
+| **Codex** (ChatGPT app) | Critic: challenges ideas and wording, **independently checks Claude's math/logic/analysis**, reviews code/PRs directly in the repo, drafts teaching material | Write only in `09_Agents/codex/`; code changes only on a `codex/<task>` branch via PR |
+| **Gemini** (app, chat only) | Reads many papers at once (Notebooks), related work, citation checks | No file access; the lead saves its output in `09_Agents/gemini/` |
+| **Microsoft Copilot** | Backup for chat-level review when Codex runs out of quota | Chat only |
 
-Cross-review: work produced by one agent is reviewed by another (e.g. Claude's code → ChatGPT reviews; Cursor's code → Claude reviews). No agent grades its own work.
+Cross-review: work produced by one agent is reviewed by another (e.g. Claude's code → Codex reviews; Cursor's code → Claude reviews). No agent grades its own work.
+When Codex runs out of quota, its tasks simply wait (or use Microsoft Copilot for chat-level review).
 
 Not used: DeepSeek (data-security concerns; Taiwan restricts it in the public sector).
 
-## 8. Working rules
+## 8. Write zones — avoiding conflicts
+Everyone may **read** everything; each agent **writes** only in its own zone.
+| Where | Who writes |
+|---|---|
+| `09_Agents/<agent>/` (Windows) | That agent only (Gemini's output saved there by the lead) |
+| `01_Papers/` … `08_Teaching/` (Windows) | Lead only (Claude only with the lead's approval) |
+| `07_Thesis/*.docx` | **Lead only** — Word files cannot be merged; agents put drafts in `09_Agents/` |
+| `03_Code/` repo | Via branch `<agent>/<task>` + PR. Claude works in its own cloud clone; Cursor/Copilot/Codex in the Windows copy, one at a time |
+| Lab: `mamba_yolo_ref/<PaperName>/` | Antigravity |
+| Lab: `yolo26/`, `yolo_mamba/` | Lead + Claude |
+| Lab: GPU (1 × RTX 3080) | One training run at a time: check `nvidia-smi` first, and log every run (who, what, tmux session, start time) — log file not yet set up |
+
+Lab runs are named `runs/<experiment>_<YYMMDD>` so nothing is overwritten.
+
+## 9. Working rules
 1. **Do nothing without the lead's permission.** Push back when there is a real problem or a better way — always with reasons.
 2. **Never fabricate numbers or evidence.** Every number must trace back to its source file (`runs/.../results.csv`, logs). Say clearly when unsure; cite sources for outside information.
 3. Be concise and focused; work step by step; do not go beyond the assigned scope.
