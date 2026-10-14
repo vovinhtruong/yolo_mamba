@@ -1,82 +1,88 @@
-# AGENTS.md — Ngữ cảnh chung cho mọi agent
+# AGENTS.md — Shared context for all agents
 
-> Mọi agent (Claude, Antigravity, Gemini, Copilot, ChatGPT, Cursor) **đọc file này trước khi làm bất cứ việc gì**.
-> Chỉ phó nhóm (Claude) sửa file này, và chỉ sau khi trưởng nhóm duyệt.
+> Every agent (Claude, Antigravity, Cursor, GitHub Copilot, Gemini, ChatGPT, Microsoft Copilot) **must read this file before doing anything**.
+> Only the deputy lead (Claude) edits this file, and only after the lead approves.
 
-## 1. Đề tài
-- Luận văn thạc sĩ (NTPU, SHAIL Lab) của **Vo Vinh Truong**: phát hiện gãy xương cổ tay trẻ em trên X-ray.
-- Dataset chính: **GRAZPEDWRI-DX**, 1 lớp `fracture`, chia theo bệnh nhân 70/20/10 (seed 42).
+## 1. Project
+- Master's thesis (NTPU, SHAIL Lab) by **Vo Vinh Truong**: pediatric wrist fracture detection on X-ray images.
+- Main dataset: **GRAZPEDWRI-DX**, 1 class `fracture`, patient-level split 70/20/10 (seed 42).
 - Baseline: **YOLO26** (Ultralytics 8.4.127), `imgsz=640`.
-- Hai đóng góp chính:
-  1. **Tích hợp Mamba (SSM) vào YOLO26** → YOLO-Mamba.
-  2. **Hướng B — phương pháp xử lý input rescaling**: giữ thông tin khi ảnh X-ray có độ phân giải gốc khác nhau bị thu về 640.
+- Two main contributions:
+  1. **Integrating Mamba (SSM) into YOLO26** → YOLO-Mamba.
+  2. **Approach B — an input-rescaling method**: preserve useful information when X-rays with different native resolutions are downscaled to 640.
 
-## 2. Quyết định ĐÃ CHỐT — không tự ý thay đổi
-- Input size mục tiêu của thí nghiệm chính: `imgsz=640`. (`1120` thuộc Hướng A, chỉ là đối chứng nếu trưởng nhóm quyết định.)
-- Ablation **2 × 2** ở `imgsz=640`: {có/không rescaling B} × {có/không Mamba}.
-- Không ablation so sánh nhiều vị trí Mamba: trưởng nhóm sẽ chọn **một** vị trí.
-- Model dùng 4 loại khối: MLP, CNN, Attention, SSM — không dùng RNN.
-- Thống kê: 3 random seeds; không dùng Wilcoxon trong proposal hiện tại.
-- Hướng B là đóng góp chính; trong Proposal v2 chỉ trình bày là đóng góp chính ở chương Methodology.
+## 2. DECIDED — do not change on your own
+- Target input size for the main experiments: `imgsz=640`. (`1120` belongs to Approach A and is only a control if the lead decides so.)
+- Ablation is **2 × 2** at `imgsz=640`: {with/without rescaling method B} × {with/without Mamba}.
+- No ablation over multiple Mamba positions: the lead will choose **one** position.
+- The model uses 4 block types: MLP, CNN, Attention, SSM — no RNN.
+- Statistics: 3 random seeds; no Wilcoxon test in the current proposal.
+- Approach B is a main contribution; in Proposal v2 it is presented as a main contribution only in the Methodology chapter.
 
-## 3. CHƯA CHỐT — agent không được tự quyết, chỉ được đề xuất kèm lý do
-- Vị trí đặt Mamba trong YOLO26 (ứng viên: layer 2, 4, 6, 8, 10, 13, 16, 19, 22 — xem `05_Notes/261013.md` §1).
-- Thuật toán cụ thể của Hướng B.
-- Epoch/batch và máy chạy cho bước train đầy đủ Mamba-YOLO-T.
+## 3. NOT YET DECIDED — agents may only propose (with reasons), never decide
+- Where to place Mamba in YOLO26 (candidates: layers 2, 4, 6, 8, 10, 13, 16, 19, 22 — see `05_Notes/261013.md` §1).
+- The concrete algorithm for Approach B.
+- Epochs/batch size and which machine to use for the full Mamba-YOLO-T training run.
 
-## 4. Trạng thái hiện tại (cập nhật 14/10/2026)
-- Baseline YOLO26 n/s/m/l/x: đã train xong (50 epoch, `imgsz=640`).
-- Chạy lại paper tham khảo **Mamba-YOLO** (#11) trên máy lab: env + kernel OK, đang train thử 2 epoch.
-- Đang viết **Proposal v2** (`07_Thesis/Proposal/`).
-- Chi tiết mới nhất luôn nằm ở file ghi chú mới nhất trong `05_Notes/`.
+## 4. Current status (updated 2026-10-14)
+- YOLO26 baselines n/s/m/l/x: trained (50 epochs, `imgsz=640`).
+- Reproducing reference paper **Mamba-YOLO** (#11) on the lab machine: env + CUDA kernel verified; 2-epoch test run in progress.
+- Writing **Proposal v2** (`07_Thesis/Proposal/`).
+- The latest details are always in the newest note in `05_Notes/`.
 
-## 5. Cấu trúc thư mục
-**Máy Windows của trưởng nhóm** — `Desktop\yolo_mamba\`:
+## 5. Folder structure
+**Lead's Windows machine** — `Desktop\yolo_mamba\`:
 ```
-01_Papers/    paper theo nhóm (A, Basic Models, CNN-VIT, Dataset, Mamba, ...) + Summary.xlsx
-02_Dataset/   GRAZ, FracAtlas, MURA (không đưa vào git)
-03_Code/      ← repo git này (github.com/vovinhtruong/yolo_mamba, private)
-04_Results/   bảng kết quả xlsx, biểu đồ
-05_Notes/     ghi chú tiến độ (YYMMDD.md); bản cũ trong archive/
-06_Reports/   slide báo cáo tuần
+01_Papers/    papers by topic (A, Basic Models, CNN-VIT, Dataset, Mamba, ...) + Summary.xlsx
+02_Dataset/   GRAZ, FracAtlas, MURA (never in git)
+03_Code/      ← this git repo (github.com/vovinhtruong/yolo_mamba, private)
+04_Results/   result tables (xlsx), charts
+05_Notes/     progress notes (YYMMDD.md); older notes in archive/
+06_Reports/   weekly report slides
 07_Thesis/    Thesis, Draft/, Proposal/
-08_Teaching/  slide dạy sinh viên mới
+08_Teaching/  teaching slides for new students
 ```
-**Repo này (`03_Code/`)**:
+**This repo (`03_Code/`)**:
 ```
-scripts/      train/eval/phân tích (đường dẫn trỏ tới máy lab ~/VINH_TRUONG/yolo26/)
-env_backup/   environment.yml, requirements của env yolo26
-repos/        (bị .gitignore) mã nguồn bên thứ ba: ultralytics, mamba, yolo26
+scripts/      train/eval/analysis scripts (paths point to the lab machine: ~/VINH_TRUONG/yolo26/)
+env_backup/   environment.yml, requirements of the yolo26 env
+repos/        (git-ignored) third-party source: ultralytics, mamba, yolo26
 ```
-**Máy lab (`lps_phuong`)**:
+**Lab machine (`lps_phuong`)**:
 ```
 ~/VINH_TRUONG/yolo26/            baseline, dataset/graz, runs/
-~/VINH_TRUONG/yolo_mamba/        (chưa xác nhận nội dung — trưởng nhóm bổ sung)
-~/VINH_TRUONG/mamba_yolo_ref/<TênBài>/env_<TênBài>/   mỗi paper tham khảo một thư mục + env riêng
+~/VINH_TRUONG/yolo_mamba/        (contents not yet confirmed — lead to fill in)
+~/VINH_TRUONG/mamba_yolo_ref/<PaperName>/env_<PaperName>/   one folder + own env per reference paper
 ```
 
-## 6. Máy tính toán
-- `lps_phuong`: 1 × RTX 3080 (~7.9 GB trống), qua Cloudflare Tunnel. Máy chính.
-- `fa_server`: 4 × A40 (48 GB), đi qua `lps_phuong`. Máy mượn — **kiểm tra GPU/ổ đĩa trước khi chạy**.
-- Train chạy trong **tmux**; eval/val/script khác chạy thẳng trong terminal.
-- **Không ghi mật khẩu, IP, token vào repo hay bất kỳ file nào trong dự án.**
+## 6. Compute
+- `lps_phuong`: 1 × RTX 3080 (~7.9 GB free VRAM), via Cloudflare Tunnel. Main machine.
+- `fa_server`: 4 × A40 (48 GB), reached through `lps_phuong`. Borrowed — **check GPU/disk before running**.
+- Training runs go in **tmux**; eval/val and other scripts run directly in the terminal.
+- **Never write passwords, IPs or tokens into the repo or any project file.**
 
-## 7. Vai trò
-| Agent | Vai trò | Được làm |
+## 7. Roles (all tools on free plans unless noted)
+| Agent | Role | Allowed to |
 |---|---|---|
-| Trưởng nhóm (người) | Quyết định mọi thứ, merge vào `main` | Tất cả |
-| **Claude** | Phó nhóm: điều phối, kiến trúc model, thiết kế thí nghiệm, phân tích, viết proposal/paper | Sửa `AGENTS.md`, code model (cùng trưởng nhóm) |
-| Antigravity | Chạy lại paper tham khảo (dựng env, sửa lỗi, train thử) | Chỉ trong `mamba_yolo_ref/<TênBài>/` |
-| Cursor | IDE chính: sửa code, refactor | Branch riêng |
-| Copilot | Review PR trên GitHub | Comment, không tự push |
-| Gemini | Đọc nhiều paper, related work, kiểm tra trích dẫn | Chỉ tài liệu, không sửa code |
-| ChatGPT | Phản biện ý tưởng/câu chữ, soạn tài liệu dạy | Chỉ tài liệu, không sửa code |
+| Lead (human) | Makes every decision, merges into `main` | Everything |
+| **Claude** | Deputy lead: coordination, model architecture, experiment design, analysis, writing the proposal/paper; reviews PRs | Edit `AGENTS.md`; write model code together with the lead |
+| **Antigravity** | Reproduces reference papers (env setup, fixing dependencies, test runs) | Only inside `mamba_yolo_ref/<PaperName>/` |
+| **Cursor** (Free) | Main IDE: editing code, refactoring | Work on its own branch |
+| **GitHub Copilot** (Free) | Backup when Cursor runs out of requests; code suggestions in VS Code when SSH-ing into the lab machine | Work on its own branch |
+| **Gemini** | Reads many papers at once, related work, citation checks | Documents only, no code changes |
+| **ChatGPT** | Critic: challenges ideas and wording, **independently checks Claude's math/logic/analysis**, reviews PRs, drafts teaching material | Documents and reviews only, no code changes |
+| **Microsoft Copilot** | Backup when ChatGPT runs out of requests | Same as ChatGPT |
 
-## 8. Quy tắc làm việc
-1. **Không làm gì khi trưởng nhóm chưa cho phép.** Được phản biện khi thấy vấn đề thật hoặc cách tốt hơn — luôn kèm lý do.
-2. **Không bịa số liệu/bằng chứng.** Số liệu phải chỉ được về file gốc (`runs/.../results.csv`, log). Không chắc thì nói rõ; thông tin bên ngoài phải ghi nguồn.
-3. Ngắn gọn, đúng trọng tâm, làm từng bước, không làm vượt phạm vi được giao.
-4. **Git:** mỗi agent làm trên branch `<agent>/<việc>` (vd. `cursor/fix-eval`), mở PR → review chéo → trưởng nhóm merge. Không push thẳng vào `main`.
-5. Không commit dataset, weights (`*.pt`), `runs/`, file zip.
-6. Chỉ ghi vào `05_Notes/` khi trưởng nhóm yêu cầu; ghi sao cho một agent khác đọc vào là hiểu đã làm gì.
-7. Phân biệt rõ **kết quả thật** và **kết quả kỳ vọng** khi viết proposal/paper.
+Cross-review: work produced by one agent is reviewed by another (e.g. Claude's code → ChatGPT reviews; Cursor's code → Claude reviews). No agent grades its own work.
+
+Not used: DeepSeek (data-security concerns; Taiwan restricts it in the public sector).
+
+## 8. Working rules
+1. **Do nothing without the lead's permission.** Push back when there is a real problem or a better way — always with reasons.
+2. **Never fabricate numbers or evidence.** Every number must trace back to its source file (`runs/.../results.csv`, logs). Say clearly when unsure; cite sources for outside information.
+3. Be concise and focused; work step by step; do not go beyond the assigned scope.
+4. **Git:** each agent works on a branch `<agent>/<task>` (e.g. `cursor/fix-eval`), opens a PR → cross-review → the lead merges. Never push directly to `main`.
+5. Never commit datasets, weights (`*.pt`), `runs/`, or zip files.
+6. Write to `05_Notes/` only when the lead asks; write so that another agent can read it and understand what was done.
+7. Keep **actual results** and **expected results** clearly separate when writing the proposal/paper.
+8. Never send datasets, unpublished results, or full thesis/proposal text to services outside this team.
