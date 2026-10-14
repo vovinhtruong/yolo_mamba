@@ -1,0 +1,17 @@
+# Third-party repos & archives (tải lại được, không theo dõi)
+repos/
+zips/
+# IDE
+.idea/
+.vscode/
+# Python
+__pycache__/
+*.pyc
+# Weights, runs, data (không bao giờ đưa vào git)
+*.pt
+*.pth
+*.onnx
+runs/
+dataset/
+*.zip
+.ultralytics_config/
