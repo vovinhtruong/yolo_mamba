@@ -109,3 +109,4 @@ Lab runs are named `runs/<experiment>_<YYMMDD>` so nothing is overwritten.
 7. Keep **actual results** and **expected results** clearly separate when writing the proposal/paper.
 8. Never send datasets, unpublished results, or full thesis/proposal text to services outside this team.
 9. **Files are reader-facing.** Any agent that produces or renders a file (docx, pptx, pdf, xlsx, figure) must check it before handing it over: it opens with no error or prompt, and has no leftover placeholders, broken numbering, stale table of contents, overflowing text or other visible defects.
+10. **No section cross-references in thesis/proposal text** (e.g. "described in Section 3.3.3", "(Section 4.3)"). State the point directly so the reader does not have to look it up.
