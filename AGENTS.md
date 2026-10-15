@@ -46,7 +46,7 @@
 06_Reports/   weekly report slides
 07_Thesis/    Thesis, Draft/, Proposal/
 08_Teaching/  teaching slides for new students
-nhóm công việc.txt   the lead's own notes: the work groups and which tool fits which (the lead's file; agents only read it)
+Work_groups.txt   the lead's own notes: the five jobs, which agent does each, and which app to open (the lead's file; agents only read it)
 ```
 **This repo (`03_Code/`)**:
 ```
@@ -82,7 +82,7 @@ repos/        (git-ignored) third-party source: ultralytics, mamba, yolo26
 | **Codex** | **4. Writing**: English academic text. The lead writes the main ideas first; Codex polishes the wording | Drafts go to the lead in chat or as a separate file, never into `07_Thesis/*.docx` |
 | **Perplexity** | **5. Find paper sources**: candidate papers, repos, citations. The lead opens every link and downloads the paper into `01_Papers/` before it is used | Chat only |
 
-Agents without local file access (Codex, Gemini, Perplexity) can be set up as a project or chat with this file and `nhóm công việc.txt` attached. GitHub Copilot and VS Code are editor helpers for the lead, not a job.
+Agents without local file access (Codex, Gemini, Perplexity) can be set up as a project or chat with this file and `Work_groups.txt` attached. GitHub Copilot and VS Code are editor helpers for the lead, not a job.
 
 Not used: Microsoft Copilot; DeepSeek (data-security concerns; Taiwan restricts it in the public sector). Review: the lead reviews every result before using it; Claude cross-checks when asked.
 
