@@ -36,7 +36,7 @@
 - The latest details are always in the newest note in `05_Notes/`.
 
 ## 5. Folder structure
-**Lead's Windows machine** — `Desktop\yolo_mamba\`:
+**Lead's Windows machine** — `Desktop\yolo_mamba\`. Paths in prompts and files are relative to this folder; a path starting with `~/` is on the lab machine (lead only):
 ```
 01_Papers/    papers by topic (A, Basic Models, CNN-VIT, Dataset, Mamba, ...) + Summary.xlsx
 02_Dataset/   GRAZ, FracAtlas, MURA (never in git)
@@ -46,7 +46,7 @@
 06_Reports/   weekly report slides
 07_Thesis/    Thesis, Draft/, Proposal/
 08_Teaching/  teaching slides for new students
-09_Agents/    per-agent working areas (drafts, notes): claude/, codex/, gemini/, antigravity/
+09_Agents/    per-agent working areas (drafts, notes): claude/, codex/, gemini/, antigravity/, cursor/
 10_Temp_Prompts/  scratch: the prompts Claude and Codex write for each task
 11_Temp_Outputs/  scratch: task outputs and reviews, one folder per task
 Workflow website/ clickable diagram of the team (open index.html; edit data.js)
@@ -117,7 +117,7 @@ Lab runs are named `runs/<experiment>_<YYMMDD>` so nothing is overwritten.
 10. **No section cross-references in thesis/proposal text** (e.g. "described in Section 3.3.3", "(Section 4.3)"). State the point directly so the reader does not have to look it up.
 11. **One document = one file.** Edit the existing file; never save extra copies or new versions (`_v3`, `_new`, …) on your own. If the file is open or locked, ask the lead to close it instead of saving under another name.
 12. **Language.** Chat with the lead in Vietnamese. Everything written into a file or page (html, docx, pptx, xlsx, figures, notes, code comments, this file) is in English.
-13. **Log problems.** When you hit a problem or a contradiction (in `AGENTS.md`, between prompts, in files or results), do not guess and do not silently work around it: append one entry to `11_Temp_Outputs/ISSUES.txt` (date, agent, task, what is wrong, where) and tell the lead. Append only; never edit or delete another agent's entry. The lead marks entries resolved.
+13. **Log problems.** When you hit a problem or a contradiction (in `AGENTS.md`, between prompts, in files or results), do not guess and do not silently work around it: append one entry to `11_Temp_Outputs/ISSUES.txt` (date, agent, task, what is wrong, where) and tell the lead. If a task prompt conflicts with this file, this file wins: follow it and log the conflict. Append only; never edit or delete another agent's entry. The lead marks entries resolved.
 
 ## 10. Workflow
 Orders go down, results come back up. The agents cannot message each other, so **the lead relays** prompts and outputs between the apps. Clickable diagram: `Workflow website/`.
