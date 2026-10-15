@@ -1,6 +1,6 @@
 # AGENTS.md — Shared context for all agents
 
-> Every agent (Claude, Antigravity, Cursor, GitHub Copilot, Codex, Gemini, Microsoft Copilot) **must read this file before doing anything**.
+> Every agent (Claude, Antigravity, Cursor, GitHub Copilot, Codex, Microsoft Copilot) **must read this file before doing anything**.
 > Only the deputy lead (Claude) edits this file, and only after the lead approves.
 
 ## 1. Project
@@ -46,7 +46,7 @@
 06_Reports/   weekly report slides
 07_Thesis/    Thesis, Draft/, Proposal/
 08_Teaching/  teaching slides for new students
-09_Agents/    per-agent working areas (drafts, notes): claude/, codex/, gemini/, antigravity/, cursor/
+09_Agents/    per-agent working areas (drafts, notes): claude/, codex/, antigravity/, cursor/
 10_Temp_Prompts/  scratch: the prompts Claude and Codex write for each task
 11_Temp_Outputs/  scratch: task outputs and reviews, one folder per task
 Workflow website/ clickable diagram of the team (open index.html; edit data.js)
@@ -80,24 +80,23 @@ repos/        (git-ignored) third-party source: ultralytics, mamba, yolo26
 |---|---|---|
 | Lead (human) | Makes every decision, merges into `main` | Everything |
 | **Claude** | Deputy lead: turns the lead's orders into prompts, **second reviewer** of every output, tracks progress, flags decisions for the lead. Does not do the other agents' work | Edit `AGENTS.md`; write in `09_Agents/claude/`, `10_Temp_Prompts/`, `11_Temp_Outputs/` |
-| **Antigravity** | Reference papers: reads each paper's repo and prepares the setup script + test-run guide for the lab | Write only in `09_Agents/antigravity/<PaperName>/`; the lead runs it on the lab |
+| **Antigravity** | Literature and reference papers: surveys papers (B1, D1), then reads each paper's repo and prepares the setup script + test-run guide for the lab (B2). Has file and web access | Write in `11_Temp_Outputs/<task>/antigravity/` and `09_Agents/antigravity/<PaperName>/`; the lead runs its scripts on the lab |
 | **Cursor** (Free) | Main IDE: writes the YOLO-Mamba code with the lead, refactoring | Work on its own branch |
 | **GitHub Copilot** (Free) | Backup when Cursor runs out of requests; code suggestions for the lead in VS Code | Work on its own branch |
 | **Codex** (ChatGPT app) | **Dispatcher and first reviewer**: splits Claude's prompts into one task prompt per agent, reviews every output first, challenges ideas, independently checks Claude's math/logic, reviews code/PRs | Write in `09_Agents/codex/`, `10_Temp_Prompts/`, `11_Temp_Outputs/`; code only on a `codex/<task>` branch via PR |
-| **Gemini** (app, chat only) | Reads many papers at once (Notebooks), related work, citation checks | No file access; the lead saves its output in `11_Temp_Outputs/<task>/gemini/` |
 | **Microsoft Copilot** | Backup for Codex (dispatch and first review, chat level) when Codex runs out of quota | Chat only |
 
 Review order: **Codex first, Claude second, then the lead.** Codex's own work (C1, D2) goes straight to Claude. No agent grades its own work.
 
-Not used: DeepSeek (data-security concerns; Taiwan restricts it in the public sector).
+Not used: DeepSeek (data-security concerns; Taiwan restricts it in the public sector); Gemini (dropped on 2026-10-15: chat only, so every answer had to be copied by hand; Antigravity does the literature surveys instead).
 
 ## 8. Write zones — avoiding conflicts
 Everyone may **read** everything; each agent **writes** only in its own zone.
 | Where | Who writes |
 |---|---|
 | `09_Agents/<agent>/` (Windows) | That agent only: its own working area (drafts, notes) |
-| `10_Temp_Prompts/` | Claude (order prompts) and Codex (task prompts). One file per prompt: `YYMMDD_<task>_claude.md`, `YYMMDD_<task>_codex-<agent>.md` (e.g. `261015_B1_codex-gemini.md`) |
-| `11_Temp_Outputs/<YYMMDD>_<task>/<agent>/` | The agent that did the work, or its reviewer (Gemini's output saved by the lead). Each agent writes only in its own subfolder. Exception: everyone appends to `11_Temp_Outputs/ISSUES.txt` (rule 13) |
+| `10_Temp_Prompts/` | Claude (order prompts) and Codex (task prompts). One file per prompt: `YYMMDD_<task>_claude.md`, `YYMMDD_<task>_codex-<agent>.md` (e.g. `261015_B1_codex-antigravity.md`) |
+| `11_Temp_Outputs/<YYMMDD>_<task>/<agent>/` | The agent that did the work, or its reviewer. Each agent writes only in its own subfolder. Exception: everyone appends to `11_Temp_Outputs/ISSUES.txt` (rule 13) |
 | `01_Papers/` … `08_Teaching/` (Windows) | Lead only (Claude only with the lead's approval) |
 | `07_Thesis/*.docx` | **Lead only** — Word files cannot be merged; agents put drafts in `09_Agents/` |
 | `03_Code/` repo | Via branch `<agent>/<task>` + PR. Claude works in its own cloud clone; Cursor/Copilot/Codex in the Windows copy, one at a time |
@@ -127,7 +126,7 @@ Orders go down, results come back up. The agents cannot message each other, so *
 1. **Lead** gives an order in plain words.
 2. **Claude** turns it into one prompt per agent and checks it against this file (saved in `10_Temp_Prompts/`).
 3. **Codex** splits it into one task prompt per agent (saved in `10_Temp_Prompts/`).
-4. **Agents** do the work: Gemini, Antigravity, Cursor (backups: GitHub Copilot, Microsoft Copilot). Output goes to `11_Temp_Outputs/`.
+4. **Agents** do the work: Antigravity, Cursor (backups: GitHub Copilot, Microsoft Copilot). Output goes to `11_Temp_Outputs/`.
 5. **Codex** reviews each output first.
 6. **Claude** reviews second.
 7. **Lead** receives only reviewed results and decides. Only the lead touches the lab.
@@ -138,9 +137,9 @@ Workstreams (LOCKED = waits for the lead's go-ahead):
 
 | Stream | Steps | Lead decides |
 |---|---|---|
-| B. Reference papers | B1 Gemini: list Mamba+YOLO papers with public code → B2 Antigravity: setup script + test-run guide, one paper at a time → B3 run on the lab (LOCKED) | Paper order; B3 |
+| B. Reference papers | B1 Antigravity: list Mamba+YOLO papers with public code → B2 Antigravity: setup script + test-run guide, one paper at a time → B3 run on the lab (LOCKED) | Paper order; B3 |
 | C. YOLO-Mamba code | C1 Codex: ways to add Mamba to Ultralytics 8.4.127 → C2–C3 Cursor + Lead: repo skeleton, Mamba block + shape tests → C4 train (LOCKED) | C1 choice; C4 |
-| D. Approach B | D1 Gemini: literature on handling different image sizes → D2 Codex: 2–3 options → D3 code + train (LOCKED) | Option; D3 |
+| D. Approach B | D1 Antigravity: literature on handling different image sizes → D2 Codex: 2–3 options → D3 code + train (LOCKED) | Option; D3 |
 | E. Documents | Lead: proposal, weekly reports, teaching slides | — |
 
-Suggested order: B1 and D1 in parallel → C1 decision → B2 one paper at a time → C2–C3.
+Suggested order: B1, then D1 (both Antigravity) → C1 decision → B2 one paper at a time → C2–C3.
