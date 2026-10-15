@@ -95,7 +95,7 @@ Everyone may **read** everything; each agent **writes** only in its own zone.
 |---|---|
 | `09_Agents/<agent>/` (Windows) | That agent only: its own working area (drafts, notes) |
 | `10_Temp_Prompts/` | Claude (order prompts) and Codex (task prompts). One file per prompt: `YYMMDD_<task>_claude.md`, `YYMMDD_<task>_codex-<agent>.md` (e.g. `261015_B1_codex-gemini.md`) |
-| `11_Temp_Outputs/<YYMMDD>_<task>/<agent>/` | The agent that did the work, or its reviewer (Gemini's output saved by the lead). Each agent writes only in its own subfolder |
+| `11_Temp_Outputs/<YYMMDD>_<task>/<agent>/` | The agent that did the work, or its reviewer (Gemini's output saved by the lead). Each agent writes only in its own subfolder. Exception: everyone appends to `11_Temp_Outputs/ISSUES.txt` (rule 13) |
 | `01_Papers/` … `08_Teaching/` (Windows) | Lead only (Claude only with the lead's approval) |
 | `07_Thesis/*.docx` | **Lead only** — Word files cannot be merged; agents put drafts in `09_Agents/` |
 | `03_Code/` repo | Via branch `<agent>/<task>` + PR. Claude works in its own cloud clone; Cursor/Copilot/Codex in the Windows copy, one at a time |
@@ -117,6 +117,7 @@ Lab runs are named `runs/<experiment>_<YYMMDD>` so nothing is overwritten.
 10. **No section cross-references in thesis/proposal text** (e.g. "described in Section 3.3.3", "(Section 4.3)"). State the point directly so the reader does not have to look it up.
 11. **One document = one file.** Edit the existing file; never save extra copies or new versions (`_v3`, `_new`, …) on your own. If the file is open or locked, ask the lead to close it instead of saving under another name.
 12. **Language.** Chat with the lead in Vietnamese. Everything written into a file or page (html, docx, pptx, xlsx, figures, notes, code comments, this file) is in English.
+13. **Log problems.** When you hit a problem or a contradiction (in `AGENTS.md`, between prompts, in files or results), do not guess and do not silently work around it: append one entry to `11_Temp_Outputs/ISSUES.txt` (date, agent, task, what is wrong, where) and tell the lead. Append only; never edit or delete another agent's entry. The lead marks entries resolved.
 
 ## 10. Workflow
 Orders go down, results come back up. The agents cannot message each other, so **the lead relays** prompts and outputs between the apps. Clickable diagram: `Workflow website/`.
