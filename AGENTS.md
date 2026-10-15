@@ -46,8 +46,6 @@
 06_Reports/   weekly report slides
 07_Thesis/    Thesis, Draft/, Proposal/
 08_Teaching/  teaching slides for new students
-09_Agents/    Claude's working area (drafts, notes, scripts for the lab): claude/
-11_Temp_Outputs/  scratch: task outputs, plus ISSUES.txt (problem log)
 AGENTS.md     short pointer to this file + write-zone rules
 ```
 **This repo (`03_Code/`)**:
@@ -70,14 +68,14 @@ repos/        (git-ignored) third-party source: ultralytics, mamba, yolo26
 - **Lab environment** (checked by the lead on 2026-10-15, env `yolo26` on `lps_phuong`): RTX 3080 with 10 GB total (about 2 GB is used by the desktop); NVIDIA driver 570.172.08 (supports up to CUDA 12.8); CUDA toolkit (`nvcc`) 12.4.131; PyTorch 2.5.1+cu121. These are the baseline env's versions. Each reference paper gets its own env under `mamba_yolo_ref/<PaperName>/`, so a script should state which versions it expects and the lead checks them.
 - **GRAZ on the lab:** `~/VINH_TRUONG/yolo26/dataset/graz/` contains `data.yaml`, `dataset.csv`, `original_dataset/`, `processed_dataset/`, `percentile_groups/` and `split/`. `data.yaml` points to `split/{train,val,test}/images`, `nc: 1`, `names: ['fracture']` (Ultralytics layout; the label folders have not been checked).
 - **Never write passwords, IPs or tokens into the repo or any project file.**
-- **The lab machines are managed by the lead only.** Claude never accesses or runs anything on them. Any code or command meant for the lab goes into the repo or `09_Agents/claude/` and is **sent to the lead**, who reviews and runs it. Lab outputs (logs, `results.csv`) are copied back by the lead; Claude then reads and analyses them.
+- **The lab machines are managed by the lead only.** Claude never accesses or runs anything on them. Any code or command meant for the lab goes into the repo (`scripts/`) and is **sent to the lead**, who reviews and runs it. Lab outputs (logs, `results.csv`) are copied back by the lead; Claude then reads and analyses them.
 - **No training run starts until the lead says so.**
 
 ## 7. Roles
 | Who | Role | Allowed to |
 |---|---|---|
 | Lead (human) | Makes every decision, reviews every result, merges into `main`, runs everything on the lab | Everything |
-| **Claude** | Does the work the lead orders: literature and reference-paper checks, setup scripts and test-run guides for the lab, YOLO-Mamba code and shape tests, analysis of lab outputs, drafts of text. Flags decisions for the lead and proposes options with reasons | Edit `AGENTS.md` (with approval); write in `09_Agents/claude/`, `11_Temp_Outputs/`; code on a `claude/<task>` branch via PR |
+| **Claude** | Does the work the lead orders: literature and reference-paper checks, setup scripts and test-run guides for the lab, YOLO-Mamba code and shape tests, analysis of lab outputs, drafts of text. Flags decisions for the lead and proposes options with reasons | Edit `AGENTS.md` (with approval); code on a `claude/<task>` branch via PR |
 
 Not used: Codex, Antigravity, Cursor, GitHub Copilot, Microsoft Copilot (dropped on 2026-10-15: every hand-off between apps had to be copied by hand, which made the workflow too slow); Gemini (dropped earlier the same day); DeepSeek (data-security concerns; Taiwan restricts it in the public sector).
 
@@ -86,14 +84,11 @@ The lead reviews every result before using it. Claude checks its own work before
 ## 8. Write zones
 | Where | Who writes |
 |---|---|
-| `09_Agents/claude/` (Windows) | Claude: drafts, notes, lab scripts (`09_Agents/claude/<PaperName>/` for a reference paper) |
-| `11_Temp_Outputs/<YYMMDD>_<task>/` | Claude: task outputs. `11_Temp_Outputs/ISSUES.txt` is the problem log (rule 12) |
-| `01_Papers/` … `08_Teaching/` (Windows) | Lead only (Claude only with the lead's approval) |
-| `07_Thesis/*.docx` | **Lead only** — Word files cannot be merged; Claude puts drafts in `09_Agents/claude/` |
+| `01_Papers/` … `08_Teaching/` (Windows) | Lead only (Claude only with the lead's approval). Files Claude produces are sent to the lead, who places them |
+| `07_Thesis/*.docx` | **Lead only** — Word files cannot be merged; Claude sends drafts to the lead as separate files or in chat |
 | `03_Code/` repo | Claude, in its own cloud clone, via branch `claude/<task>` + PR |
 | Lab machines (everything: `yolo26/`, `yolo_mamba/`, `mamba_yolo_ref/`, GPU) | **Lead only** — Claude sends code/commands to the lead |
 
-The temp folders are scratch: once the lead accepts a result, the lead moves it to its final place and clears the task folder.
 Lab runs are named `runs/<experiment>_<YYMMDD>` so nothing is overwritten.
 
 ## 9. Working rules
@@ -108,7 +103,7 @@ Lab runs are named `runs/<experiment>_<YYMMDD>` so nothing is overwritten.
 9. **Files are reader-facing.** Any file Claude produces or renders (docx, pptx, pdf, xlsx, figure) must be checked before handing it over: it opens with no error or prompt, and has no leftover placeholders, broken numbering, stale table of contents, overflowing text or other visible defects.
 10. **No section cross-references in thesis/proposal text** (e.g. "described in Section 3.3.3", "(Section 4.3)"). State the point directly so the reader does not have to look it up.
 11. **One document = one file.** Edit the existing file; never save extra copies or new versions (`_v3`, `_new`, …) on your own. If the file is open or locked, ask the lead to close it instead of saving under another name.
-12. **Language and problems.** Chat with the lead in Vietnamese. Everything written into a file or page (html, docx, pptx, xlsx, figures, notes, code comments, this file) is in English. When a problem or contradiction turns up (in `AGENTS.md`, in files or results), do not guess and do not silently work around it: append one entry to `11_Temp_Outputs/ISSUES.txt` (date, who, task, what is wrong, where) and tell the lead. Append only; the lead marks entries resolved.
+12. **Language and problems.** Chat with the lead in Vietnamese. Everything written into a file or page (html, docx, pptx, xlsx, figures, notes, code comments, this file) is in English. When a problem or contradiction turns up (in `AGENTS.md`, in files or results), do not guess and do not silently work around it: tell the lead right away, with what is wrong and where.
 
 ## 10. Workflow
 1. **Lead** gives an order in plain words.
