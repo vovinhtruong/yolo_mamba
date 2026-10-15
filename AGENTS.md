@@ -47,9 +47,7 @@
 07_Thesis/    Thesis, Draft/, Proposal/
 08_Teaching/  teaching slides for new students
 09_Agents/    Claude's working area (drafts, notes, scripts for the lab): claude/
-10_Temp_Prompts/  scratch (currently unused)
 11_Temp_Outputs/  scratch: task outputs, plus ISSUES.txt (problem log)
-Workflow website/ diagram of the old multi-agent team (outdated; kept until the lead decides)
 AGENTS.md     short pointer to this file + write-zone rules
 ```
 **This repo (`03_Code/`)**:
@@ -79,7 +77,7 @@ repos/        (git-ignored) third-party source: ultralytics, mamba, yolo26
 | Who | Role | Allowed to |
 |---|---|---|
 | Lead (human) | Makes every decision, reviews every result, merges into `main`, runs everything on the lab | Everything |
-| **Claude** | Does the work the lead orders: literature and reference-paper checks, setup scripts and test-run guides for the lab, YOLO-Mamba code and shape tests, analysis of lab outputs, drafts of text. Flags decisions for the lead and proposes options with reasons | Edit `AGENTS.md` (with approval); write in `09_Agents/claude/`, `10_Temp_Prompts/`, `11_Temp_Outputs/`; code on a `claude/<task>` branch via PR |
+| **Claude** | Does the work the lead orders: literature and reference-paper checks, setup scripts and test-run guides for the lab, YOLO-Mamba code and shape tests, analysis of lab outputs, drafts of text. Flags decisions for the lead and proposes options with reasons | Edit `AGENTS.md` (with approval); write in `09_Agents/claude/`, `11_Temp_Outputs/`; code on a `claude/<task>` branch via PR |
 
 Not used: Codex, Antigravity, Cursor, GitHub Copilot, Microsoft Copilot (dropped on 2026-10-15: every hand-off between apps had to be copied by hand, which made the workflow too slow); Gemini (dropped earlier the same day); DeepSeek (data-security concerns; Taiwan restricts it in the public sector).
 
