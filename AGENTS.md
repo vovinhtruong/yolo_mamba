@@ -46,7 +46,6 @@
 06_Reports/   weekly report slides
 07_Thesis/    Thesis, Draft/, Proposal/
 08_Teaching/  teaching slides for new students
-AGENTS.md     short pointer to this file + write-zone rules
 nhóm công việc.txt   the lead's own notes: the work groups and which tool fits which (the lead's file; agents only read it)
 ```
 **This repo (`03_Code/`)**:
