@@ -69,6 +69,8 @@ repos/        (git-ignored) third-party source: ultralytics, mamba, yolo26
 - `lps_phuong`: 1 × RTX 3080 (~7.9 GB free VRAM), via Cloudflare Tunnel. Main machine.
 - `fa_server`: 4 × A40 (48 GB), reached through `lps_phuong`. Borrowed — **check GPU/disk before running**.
 - Training runs go in **tmux**; eval/val and other scripts run directly in the terminal.
+- **Lab environment** (checked by the lead on 2026-10-15, env `yolo26` on `lps_phuong`): RTX 3080 with 10 GB total (about 2 GB is used by the desktop); NVIDIA driver 570.172.08 (supports up to CUDA 12.8); CUDA toolkit (`nvcc`) 12.4.131; PyTorch 2.5.1+cu121. These are the baseline env's versions. Each reference paper gets its own env under `mamba_yolo_ref/<PaperName>/`, so a script should state which versions it expects and the lead checks them.
+- **GRAZ on the lab:** `~/VINH_TRUONG/yolo26/dataset/graz/` contains `data.yaml`, `dataset.csv`, `original_dataset/`, `processed_dataset/`, `percentile_groups/` and `split/`. `data.yaml` points to `split/{train,val,test}/images`, `nc: 1`, `names: ['fracture']` (Ultralytics layout; the label folders have not been checked).
 - **Never write passwords, IPs or tokens into the repo or any project file.**
 - **The lab machines are managed by the lead only.** No agent accesses or runs anything on them. Any code or command meant for the lab goes into the repo or `09_Agents/<agent>/` and is **sent to the lead**, who reviews and runs it. Lab outputs (logs, `results.csv`) are copied back by the lead; agents then read and analyse them.
 - **No training run starts until the lead says so.**
