@@ -121,7 +121,9 @@ Workstreams (LOCKED = waits for the lead's go-ahead):
 
 | Stream | Steps (agent) | Lead decides |
 |---|---|---|
-| B. Reference papers | B1 find 1–2 Mamba+YOLO papers with public code (Perplexity; start from `01_Papers/Mamba`) → B2 explain each paper (Gemini) → B3 setup script + test-run guide (Cursor) → B4 run on the lab (LOCKED) | Paper order; B4 |
+| B. Reference papers | B1 find Mamba+YOLO papers with public code (Perplexity; start from `01_Papers/Mamba`; the first trial is 1–2 papers, then the rest, because phase 1 covers every such paper) → B2 explain each paper (Gemini) → B3 setup script + test-run guide (Cursor) → B4 run on the lab (LOCKED) | Paper order; B4 |
 | C. YOLO-Mamba code | C1 explain how each paper adds Mamba (Gemini) → C2 lead + Claude propose candidate positions → C3 Mamba block + shape tests (Cursor) → C4 train (LOCKED) | Positions; C4 |
 | D. Approach B | D1 find literature on handling different image sizes (Perplexity) → D2 explain it (Gemini) → D3 lead + Claude propose 2–3 options → D4 code + train (Cursor; LOCKED) | Option; D4 |
 | E. Documents | Lead writes the ideas; Codex polishes the English (proposal, weekly reports, teaching slides) | — |
+
+Code boundary: our own YOLO-Mamba model code (C3) waits until the lead has chosen the Mamba positions. Setup scripts and test-run guides for a reference paper's own repo (B3) are allowed as soon as the lead gives that task.
