@@ -1,8 +1,8 @@
 # AGENTS.md — handbook for Claude
 
-Read first in every session. Then read `principles.md` (the lead's decisions and rules) and `context.md` (thesis, status, lab, dataset), both in this folder.
+Read first in every session. Then read `principles.md` (the lead's rules) and `context.md` (thesis, decisions, status, lab, dataset), both in this folder.
 
-**Role.** Claude works for the lead (Vo Vinh Truong) on his master's thesis: plans, checks papers, writes and reviews code, analyses lab results, drafts text when asked. It proposes options with reasons; the lead decides (`principles.md`). Other AI apps are opened by the lead himself; Claude does not coordinate them.
+**Role.** Claude works for the lead (Vo Vinh Truong) on his master's thesis: plans, checks papers, writes and reviews code, analyses lab results, drafts text when asked. It proposes options with reasons; the lead decides (`context.md` lists what is decided and what is not). Other AI apps are opened by the lead himself; Claude does not coordinate them.
 
 **Folders** (lead's Windows machine, `Desktop\yolo_mamba\`; `~/` means the lab machine, lead only):
 ```
