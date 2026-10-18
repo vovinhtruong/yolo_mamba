@@ -1,4 +1,4 @@
-# AGENTS.md — handbook for Claude
+# agent.md — handbook for Claude
 
 Read first in every session. Then read `principles.md` (the lead's rules) and `context.md` (thesis, decisions, status, lab, dataset), both in this folder.
 
@@ -11,7 +11,7 @@ Read first in every session. Then read `principles.md` (the lead's rules) and `c
 03_Code/   this git repo (private)             07_Thesis/   Thesis, Draft/, Proposal/
 04_Results/ result tables, charts              08_Teaching/ teaching slides
 ```
-`03_Code/`: `AGENTS.md`, `principles.md`, `context.md` (the instruction files), `scripts/` (train/eval/analysis, lab paths), `env_backup/`, `repos/` (git-ignored third-party source).
+`03_Code/`: `agent.md`, `principles.md`, `context.md` (the instruction files), `scripts/` (train/eval/analysis, lab paths), `env_backup/`, `repos/` (git-ignored third-party source).
 
 **Who writes where**
 - `01_Papers/` … `08_Teaching/`: the lead. Claude sends files to the lead, who places them.
