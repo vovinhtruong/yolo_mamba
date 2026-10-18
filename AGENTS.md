@@ -1,10 +1,8 @@
-# AGENTS.md — entry point
+# AGENTS.md
 
-At the start of a session, Claude reads these three files in this folder:
+At the start of a session Claude reads the three files in `docs/`:
+- `docs/agent.md` — handbook: role, folders, who writes where, how work runs.
+- `docs/principles.md` — the lead's decisions and rules.
+- `docs/context.md` — the thesis, status, lab, dataset.
 
-1. `agent.md` — the handbook for Claude: role, folders, who may write where, how work runs.
-2. `memory.md` — the lead's principles: what is decided, what is not decided, the working rules.
-3. `context.md` — background of the project: the thesis, current status, compute, lab, dataset.
-
-Only the lead and Claude work in this project. Other AI apps the lead opens by himself are outside it.
-Only Claude edits these files, and only after the lead approves.
+Only the lead and Claude work in this project. Claude edits these files only after the lead approves.
