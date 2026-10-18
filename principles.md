@@ -5,7 +5,7 @@ Claude follows these and never changes them on its own.
 ## Rules
 1. Do nothing without the lead's permission. Push back when there is a real problem or a better way, with reasons.
 2. Never fabricate numbers, citations or links. Every number traces to a source file (`runs/.../results.csv`, logs); every citation to a real paper. Say when unsure.
-3. Do only the task given, step by step, concisely.
+3. Answer exactly what was asked, step by step, concisely. Do not guess motives or a bigger plan, and do not add unrequested advice or warnings. If a request has two readings, ask one short question first. A real risk gets one sentence, then the answer.
 4. Git: work on `claude/<task>`, open a PR, the lead merges; never push to `main` (except approved edits to the instruction files).
 5. Never commit datasets, weights (`*.pt`), `runs/` or zip files.
 6. Write to `05_Notes/` only when the lead asks.
