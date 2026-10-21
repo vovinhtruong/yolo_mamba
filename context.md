@@ -14,14 +14,14 @@ Two contributions: (1) integrate **Mamba (SSM)** into YOLO26 → YOLO-Mamba; (2)
 - YOLO26 nano is the base model (lightweight requirement; at most 1.2 mAP@0.5 points below l/x).
 - Main reported metric: mAP@0.5; the full metric set goes to the professor in Excel.
 - The input size effect analysis is motivation for the rescaling method only, not a contribution.
+- Pretraining mismatch (Mamba-YOLO-T from scratch on Ultralytics 8.2.29 vs YOLO26 pretrained on 8.4.127) is stated as a design limitation (2026-10-21). Other training settings are kept the same where possible.
 
 ## Not decided — Claude may only propose, with reasons
 - Where Mamba goes in YOLO26 (candidate layers 2, 4, 6, 8, 10, 13, 16, 19, 22 — see `05_Notes/261013.md`).
 - The concrete algorithm for Approach B.
 - Epochs, batch size and machine for the full Mamba-YOLO-T run.
-- Pretraining mismatch (Mamba-YOLO-T from scratch on Ultralytics 8.2.29 vs YOLO26 pretrained on 8.4.127): match the settings or state it as a limitation. Waits until the lead has met the professor.
 
-**Status** (2026-10-21, may be out of date; newest details are in `05_Notes/` and the current weekly report in `06_Reports/`). YOLO26 n/s/m/l/x baselines re-evaluated (batch 4, best.pt, val). Input size effect study rebuilt: 6 input sizes × 3 seeds; 640 is lowest, the gap is mainly in the largest images (P90). Mamba-YOLO (#11) on the lab: env and CUDA kernel verified, peak GPU memory 2.55 GB at batch 4, two-epoch pilot log not yet collected. Progress goes into the professor's weekly SHAIL template (`06_Reports/`); the proposal is not resubmitted for now. Current focus: discuss and choose the input rescaling method (Approach B). On hold until the lead asks: proposal edits (including the title), Grad-CAM.
+**Status** (2026-10-21, may be out of date; newest details are in `05_Notes/` and the current weekly report in `06_Reports/`). YOLO26 n/s/m/l/x baselines re-evaluated (batch 4, best.pt, val). Input size effect study rebuilt: 6 input sizes × 3 seeds; 640 is lowest, the gap is mainly in the largest images (P90). Mamba-YOLO (#11) on the lab: env and CUDA kernel verified, peak GPU memory 2.55 GB at batch 4, two-epoch pilot done 2026-10-21 (peak GPU memory 2.87 GB, about 6.8 min per epoch, 50 epochs about 5.7 h estimated; logs in `04_Results/mamba-yolo/`). Progress goes into the professor's weekly SHAIL template (`06_Reports/`); the proposal is not resubmitted for now. Current focus: discuss and choose the input rescaling method (Approach B). On hold until the lead asks: proposal edits (including the title), Grad-CAM.
 
 **Compute.** `lps_phuong`: 1 × RTX 3080 (10 GB, ~2 GB used by the desktop), via Cloudflare Tunnel; main machine. `fa_server`: 4 × A40 (48 GB), borrowed, through `lps_phuong`: check GPU and disk first. Training runs in tmux; eval and other scripts run in the terminal.
 IDEs: on Windows the lead reads code only in Antigravity; VS Code (Remote-SSH) is used only for the lab, to avoid mixing them up.

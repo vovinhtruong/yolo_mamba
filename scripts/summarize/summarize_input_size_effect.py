@@ -214,7 +214,7 @@ def write_scale(ws, scales: dict[tuple[str, int], float], medians: dict[str, flo
 
 
 def main() -> None:
-    """Build excel_output/eval_input_rescale_affect.xlsx from the evaluation results."""
+    """Build excel_output/eval_input_size_effect.xlsx from the evaluation results."""
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     rows = read_results(EVAL_DIR)
     if not rows:

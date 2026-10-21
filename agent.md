@@ -29,6 +29,6 @@ Git: there is no git on the lab machine and git never touches it. The lab copy o
 - C. YOLO-Mamba code: see how each paper adds Mamba → pick candidate positions with the lead → Mamba block + shape tests → training (LOCKED).
 - D. Approach B: literature on different image sizes → 2–3 options → code + training (LOCKED).
 - E. Documents: the lead writes, Claude drafts when asked.
-- Current focus: D (choose the input rescaling method). On hold until the lead asks: proposal edits (including the title), Grad-CAM. The pretraining mismatch waits until the lead has met the professor.
+- Current focus: D (choose the input rescaling method). On hold until the lead asks: proposal edits (including the title), Grad-CAM. The pretraining mismatch is stated as a design limitation (see `context.md`).
 
 Our own YOLO-Mamba model code waits until the lead picks the Mamba positions; setup scripts for a reference paper's own repo may start as soon as the lead asks.
