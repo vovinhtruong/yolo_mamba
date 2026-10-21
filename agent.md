@@ -9,14 +9,14 @@ Read first in every session. Before each reply ask: did I answer exactly what wa
 01_Papers/ papers by topic + Summary.xlsx     05_Notes/    progress notes (YYMMDD.md)
 02_Dataset/ GRAZ, FracAtlas, MURA (not in git) 06_Reports/  weekly reports (SHAIL template .docx; old slides in Before/)
 03_Code/   this git repo (private)             07_Thesis/   Thesis, Draft/, Proposal/
-04_Results/ result tables, charts              08_Teaching/ teaching slides
+(04_Results/ moved into 03_Code/results/)     08_Teaching/ teaching slides
                                                09_Professor Response/ weekly reports reviewed by the professor
 ```
 Main progress files: the dated notes in `05_Notes/` and the current weekly report in `06_Reports/Week NN/` (e.g. `Truong_20261021-WKLY-SHAIL-Lab-Progress-Report.docx`).
-`03_Code/`: `agent.md`, `principles.md`, `context.md`, `skill.md` (the instruction files), `scripts/` split by task (`data_preprocessing/`, `train/`, `eval/`, `summarize/`, `tools/`; lab paths), `env_backup/`, `repos/` and `zips/` (git-ignored third-party source).
+`03_Code/`: `agent.md`, `principles.md`, `context.md`, `skill.md` (the instruction files), `scripts/` split by task (`data_preprocessing/`, `train/`, `eval/`, `summarize/`, `tools/`; lab paths), `results/` (result tables and the Mamba-YOLO pilot log, pushed to GitHub), `env_backup/`, `repos/` and `zips/` (git-ignored third-party source).
 
 **Who writes where**
-- `01_Papers/` … `08_Teaching/`: the lead. Claude sends files to the lead, who places them.
+- `01_Papers/` … `09_Professor Response/` and `03_Code/results/`: the lead. Claude sends files to the lead, who places them.
 - `07_Thesis/*.docx`: the lead only. Claude sends drafts as separate files or in chat.
 - `03_Code/`: Claude on a branch `claude/<task>` + PR; the lead merges. Exception: the instruction files, once the lead approves.
 - Lab machines: the lead only. Claude sends code and commands to the lead.
