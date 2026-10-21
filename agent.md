@@ -9,7 +9,8 @@ Read first in every session. Before each reply ask: did I answer exactly what wa
 01_Papers/ papers by topic + Summary.xlsx     05_Notes/    progress notes (YYMMDD.md)
 02_Dataset/ GRAZ, FracAtlas, MURA (not in git) 06_Reports/  weekly reports (SHAIL template .docx; old slides in Before/)
 03_Code/   this git repo (private)             07_Thesis/   Thesis, Draft/, Proposal/
-(04_Results/ moved into 03_Code/results/)     08_Teaching/ teaching slides
+04_Tmp/    temporary files for Claude to read;  08_Teaching/ teaching slides
+           not in git (results now in 03_Code/results/)
                                                09_Professor Response/ weekly reports reviewed by the professor
 ```
 Main progress files: the dated notes in `05_Notes/` and the current weekly report in `06_Reports/Week NN/` (e.g. `Truong_20261021-WKLY-SHAIL-Lab-Progress-Report.docx`).
