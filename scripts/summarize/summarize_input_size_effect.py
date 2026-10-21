@@ -1,7 +1,7 @@
 """Collect the input size evaluation results into Excel tables.
 
 Reads runs/eval/input_size/<run>/<image_set>/metrics.yaml (written by
-eval/eval_input_size_effect.py) and writes excel_output/eval_input_rescale_affect.xlsx:
+eval/eval_input_size_effect.py) and writes excel_output/eval_input_size_effect.xlsx:
 
     all_runs          one row per (input size, seed, image set), the raw table
     overall_by_size   is performance at 640 lower than at larger input sizes? (all images)
@@ -37,7 +37,7 @@ GROUPS = {  # group name -> image list used by the evaluation
     "P70": GROUP_DIR / "val_1120.txt",
     "P90": GROUP_DIR / "val_1280.txt",  # largest images
 }
-OUTPUT_XLSX = ROOT / "excel_output" / "eval_input_rescale_affect.xlsx"
+OUTPUT_XLSX = ROOT / "excel_output" / "eval_input_size_effect.xlsx"
 DECIMALS = 3     # metrics and means
 SD_DECIMALS = 4  # standard deviations are small, 3 decimals would often show 0.000
 
@@ -131,19 +131,29 @@ def scale_fill(scale: float) -> PatternFill:
         return ENLARGED_FILL
     return MATCHED_FILL
 
-
 def write_all_runs(ws, rows: list[dict]) -> None:
-    """Raw table: one row per (input size, seed, image set)."""
-    cols = ["imgsz", "seed", "image_set", "n_images", "run", "model", "train_batch", "epochs",
-            "split", "val_batch", *METRICS]
+    """Raw table: one row per (input size, seed, image set).
+
+    Settings that are the same for every run, and the number of images in each
+    image set, are written once in the note lines instead of repeating them in
+    every row; a setting that differs between runs gets its own column.
+    """
+    settings = ["model", "train_batch", "epochs", "split", "val_batch"]
+    same = {k: rows[0][k] for k in settings if len({r[k] for r in rows}) == 1}
+    varying = [k for k in settings if k not in same]
+    if varying:
+        LOGGER.warning("Settings differ between runs: %s", ", ".join(varying))
+    n_images = {r["image_set"]: r["n_images"] for r in rows}
+    cols = ["imgsz", "seed", "image_set", *varying, *METRICS]
     note(ws, 1, "One row per (input size, seed, image set). best.pt evaluated with model.val; "
                 "source: runs/eval/input_size/<run>/<image_set>/metrics.yaml")
-    header(ws, 3, cols)
-    for i, r in enumerate(rows, start=4):
+    note(ws, 2, "Same for all runs: " + ", ".join(f"{k} = {v}" for k, v in same.items()))
+    note(ws, 3, "Images per set: " + ", ".join(f"{k} = {v} samples" for k, v in n_images.items()))
+    header(ws, 5, cols)
+    for i, r in enumerate(rows, start=6):
         for j, name in enumerate(cols, start=1):
             put(ws, i, j, r.get(name), decimals=DECIMALS if name in METRICS else None)
-    ws.auto_filter.ref = f"A3:{get_column_letter(len(cols))}{3 + len(rows)}"
-
+    ws.auto_filter.ref = f"A5:{get_column_letter(len(cols))}{5 + len(rows)}"
 
 def write_overall(ws, rows: list[dict], sizes: list[int], seeds: list[int]) -> None:
     """Table on all images: input size x seed, with mean and SD, one block per metric."""
