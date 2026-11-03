@@ -28,8 +28,8 @@ Git: there is no git on the lab machine and git never touches it. The lab copy o
 **Work streams** (LOCKED = waits for the lead's go-ahead)
 - B. Reference papers: find Mamba+YOLO papers with public code (first 1–2, then the rest) → explain each → setup script + test-run guide → lab run (LOCKED).
 - C. YOLO-Mamba code: see how each paper adds Mamba → pick candidate positions with the lead → Mamba block + shape tests → training (LOCKED).
-- D. Approach B: literature on different image sizes → 2–3 options → code + training (LOCKED).
+- D. Detail-preserving downscaling: literature on different image sizes → 2–3 options → code + training (LOCKED).
 - E. Documents: the lead writes, Claude drafts when asked.
-- Current focus: D (choose the input rescaling method). On hold until the lead asks: proposal edits (including the title), Grad-CAM. The pretraining mismatch is stated as a design limitation (see `context.md`).
+- Current focus: D (choose the detail-preserving downscaling method). On hold until the lead asks: proposal edits (including the title), Grad-CAM. The pretraining mismatch is stated as a design limitation (see `context.md`).
 
 Our own YOLO-Mamba model code waits until the lead picks the Mamba positions; setup scripts for a reference paper's own repo may start as soon as the lead asks.

@@ -15,6 +15,8 @@ Claude follows these and never changes them on its own.
 10. No section cross-references in thesis text ("see Section 3.3.3"); state the point directly.
 11. One document = one file. Edit the existing file; no extra copies or `_v2`. If it is locked, ask the lead to close it.
 12. Chat with the lead in Vietnamese; everything written into a file is in English. If something is unclear or contradicts another file, say so right away instead of guessing.
+13. Before writing code, give the main idea, then the steps one at a time: which file, where, what code and why. The lead approves each step before the next. Each step shows its full code block; when a step changes code from an earlier step, show the whole function and name the changed lines. Before saying code is correct, check the whole file against the agreed steps.
+14. Do not update the dashboard (the Thesis tracker artifact) without the lead's permission.
 
 ## Lab and secrets
 - Never write passwords, IPs or tokens into the repo or any project file.

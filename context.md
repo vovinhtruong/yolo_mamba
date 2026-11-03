@@ -1,27 +1,27 @@
 # context.md — background and decisions
 
 **Thesis.** Master's thesis (NTPU, SHAIL Lab) by Vo Vinh Truong: pediatric wrist fracture detection on X-rays. Dataset **GRAZPEDWRI-DX**, 1 class `fracture`, patient-level split 70/20/10 (seed 42). Baseline **YOLO26 nano** (Ultralytics 8.4.127), `imgsz=640`.
-Two contributions: (1) integrate **Mamba (SSM)** into YOLO26 → YOLO-Mamba; (2) **Approach B**, an input-rescaling method that keeps useful information when X-rays of different native resolutions are downscaled to 640.
+Two contributions: (1) integrate **Mamba (SSM)** into YOLO26 → YOLO-Mamba; (2) **detail-preserving downscaling**, a method that keeps useful information when X-rays of different native resolutions are downscaled to 640 (short name `downscale` in folders and scripts; called "Approach B" or "input rescaling method" in notes and reports before 2026-11-03).
 
 ## Decided — Claude never changes these on its own
 - Main experiments use `imgsz=640` (`1120` is Approach A, only a control if the lead says so).
-- Ablation 2 × 2 at `imgsz=640`: {with/without rescaling method B} × {with/without Mamba}.
+- Ablation 2 × 2 at `imgsz=640`: {with/without detail-preserving downscaling} × {with/without Mamba}.
 - Mamba workflow: (1) reproduce **every** reference Mamba+YOLO paper with public code on GRAZ, to learn how others customise YOLO and to get baselines (their model on our data, not directly comparable to YOLO26); (2) discuss candidate Mamba positions with Claude; (3) try candidates one by one; the one that works goes into the 2 × 2 ablation.
 - Choose models on the validation set only; run the test set once, at the very end.
 - Four block types: MLP, CNN, Attention, SSM — no RNN.
 - 3 random seeds: report each seed and mean ± SD, descriptive only; no Wilcoxon test (professor, 2026-10-18). If inference is needed: paired bootstrap CI over patient-level test cases.
-- Approach B is a main contribution, presented as such only in the Methodology chapter of Proposal v2.
+- Detail-preserving downscaling is a main contribution, presented as such only in the Methodology chapter of Proposal v2.
 - YOLO26 nano is the base model (lightweight requirement; at most 1.2 mAP@0.5 points below l/x).
 - Main reported metric: mAP@0.5; the full metric set goes to the professor in Excel.
-- The input size effect analysis is motivation for the rescaling method only, not a contribution.
+- The input size effect analysis is motivation for the downscaling method only, not a contribution.
 - Pretraining mismatch (Mamba-YOLO-T from scratch on Ultralytics 8.2.29 vs YOLO26 pretrained on 8.4.127) is stated as a design limitation (2026-10-21). Other training settings are kept the same where possible.
 
 ## Not decided — Claude may only propose, with reasons
 - Where Mamba goes in YOLO26 (candidate layers 2, 4, 6, 8, 10, 13, 16, 19, 22 — see `05_Notes/261013.md`).
-- The concrete algorithm for Approach B.
+- The concrete detail-preserving downscaling algorithm.
 - Epochs, batch size and machine for the full Mamba-YOLO-T run.
 
-**Status** (2026-10-21, may be out of date; newest details are in `05_Notes/` and the current weekly report in `06_Reports/`). YOLO26 n/s/m/l/x baselines re-evaluated (batch 4, best.pt, val). Input size effect study rebuilt: 6 input sizes × 3 seeds; 640 is lowest, the gap is mainly in the largest images (P90). Mamba-YOLO (#11) on the lab: env and CUDA kernel verified, peak GPU memory 2.55 GB at batch 4, two-epoch pilot done 2026-10-21 (peak GPU memory 2.87 GB, about 6.8 min per epoch, 50 epochs about 5.7 h estimated; logs in `03_Code/results/mamba-yolo/`). Progress goes into the professor's weekly SHAIL template (`06_Reports/`); the proposal is not resubmitted for now. Current focus: discuss and choose the input rescaling method (Approach B). On hold until the lead asks: proposal edits (including the title), Grad-CAM.
+**Status** (2026-10-21, may be out of date; newest details are in `05_Notes/` and the current weekly report in `06_Reports/`). YOLO26 n/s/m/l/x baselines re-evaluated (batch 4, best.pt, val). Input size effect study rebuilt: 6 input sizes × 3 seeds; 640 is lowest, the gap is mainly in the largest images (P90). Mamba-YOLO (#11) on the lab: env and CUDA kernel verified, peak GPU memory 2.55 GB at batch 4, two-epoch pilot done 2026-10-21 (peak GPU memory 2.87 GB, about 6.8 min per epoch, 50 epochs about 5.7 h estimated; logs in `03_Code/results/mamba-yolo/`). Progress goes into the professor's weekly SHAIL template (`06_Reports/`); the proposal is not resubmitted for now. Current focus: discuss and choose the detail-preserving downscaling method. On hold until the lead asks: proposal edits (including the title), Grad-CAM.
 
 **Compute.** `lps_phuong`: 1 × RTX 3080 (10 GB, ~2 GB used by the desktop), via Cloudflare Tunnel; main machine. `fa_server`: 4 × A40 (48 GB), borrowed, through `lps_phuong`: check GPU and disk first. Training runs in tmux; eval and other scripts run in the terminal.
 IDEs: on Windows the lead reads code only in Antigravity; VS Code (Remote-SSH) is used only for the lab, to avoid mixing them up.
