@@ -13,12 +13,12 @@ from skimage.filters import unsharp_mask
 
 # ===== Settings =====
 inputdirs = [
-    pathlib.Path('/home/phuong/VINH_TRUONG/yolo26/dataset/graz/original_dataset/images_part1'),
-    pathlib.Path('/home/phuong/VINH_TRUONG/yolo26/dataset/graz/original_dataset/images_part2'),
-    pathlib.Path('/home/phuong/VINH_TRUONG/yolo26/dataset/graz/original_dataset/images_part3'),
-    pathlib.Path('/home/phuong/VINH_TRUONG/yolo26/dataset/graz/original_dataset/images_part4'),
+    pathlib.Path('~/VINH_TRUONG/yolo26/dataset/graz/original_dataset/images_part1').expanduser(),
+    pathlib.Path('~/VINH_TRUONG/yolo26/dataset/graz/original_dataset/images_part2').expanduser(),
+    pathlib.Path('~/VINH_TRUONG/yolo26/dataset/graz/original_dataset/images_part3').expanduser(),
+    pathlib.Path('~/VINH_TRUONG/yolo26/dataset/graz/original_dataset/images_part4').expanduser(),
 ]
-outputdir = pathlib.Path('/home/phuong/VINH_TRUONG/yolo26/dataset/graz/processed_dataset/images')
+outputdir = pathlib.Path('~/VINH_TRUONG/yolo26/dataset/graz/processed_dataset/images').expanduser()
 filetypes = set(['.tif', '.tiff', '.png', '.jpg', '.jpeg', '.bmp'])
 output_filetype = '.png'
 jpg_compression = '30'

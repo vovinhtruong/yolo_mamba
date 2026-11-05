@@ -17,7 +17,7 @@ PROJECT = ROOT / "runs" / "train" / "downscale"
 INTERP = "area"  # area, linear, cubic or lanczos
 IMGSZ = 640
 SEEDS = [0, 1, 2]
-BATCH = 4
+BATCH = 8
 EPOCHS = 50
 DEVICE = 0
 
