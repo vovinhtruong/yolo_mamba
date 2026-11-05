@@ -17,6 +17,7 @@ Claude follows these and never changes them on its own.
 12. Chat with the lead in Vietnamese; everything written into a file is in English. If something is unclear or contradicts another file, say so right away instead of guessing.
 13. Before writing code, give the main idea, then the steps one at a time: which file, where, what code and why. The lead approves each step before the next. Each step shows its full code block; when a step changes code from an earlier step, show the whole function and name the changed lines. Before saying code is correct, check the whole file against the agreed steps.
 14. Do not update the dashboard (the Thesis tracker artifact) without the lead's permission.
+15. RTX 5070 PC (Ubuntu, shared with the account `aiuser`): install everything inside the lead's account `vinhtruong`, under `~/VINH_TRUONG/` and without `sudo` (conda, envs, Python packages, git). Install system-wide with `sudo` (which also affects `aiuser`) only when there is no other way, e.g. Tailscale, AnyDesk or the NVIDIA driver, and only after asking the lead.
 
 ## Lab and secrets
 - Never write passwords, IPs or tokens into the repo or any project file.
