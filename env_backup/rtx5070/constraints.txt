@@ -1,0 +1,6 @@
+torch==2.7.1
+torchvision==0.22.1
+mamba-ssm==2.3.0
+causal-conv1d==1.6.0
+transformers==4.46.3
+einops==0.8.2

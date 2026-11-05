@@ -1,0 +1,19 @@
+== date
+Thu Nov  5 04:55:23 PM CST 2026
+== gpu / driver
+name, driver_version, memory.total [MiB]
+NVIDIA GeForce RTX 5070 Ti, 580.178.04, 16303 MiB
+== gcc (conda env)
+gcc (conda-forge gcc 16.2.0-7) 16.2.0
+== os
+PRETTY_NAME="Ubuntu 24.04.3 LTS"
+== python packages
+python 3.11.18
+torch 2.7.1+cu128 | cuda 12.8 | cudnn 90701 | cxx11abi True | gpu NVIDIA GeForce RTX 5070 Ti
+torchvision 0.22.1+cu128
+ultralytics 8.4.127 /home/vinhtruong/VINH_TRUONG/yolo_mamba/ultralytics-src/ultralytics/__init__.py
+mamba_ssm 2.3.0
+causal_conv1d 1.6.0
+opencv 5.0.0
+== ultralytics-src
+GitHub archive of commit 8e1eb77948c6c4aa110ad0b4aaacb93fd9855967 (tag v8.4.127), no .git
